@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ria</title><link rel="stylesheet" href="/static/styles.css">
+</head><body>
+<header><h1>RIA</h1><p>Ricky Davies Tattoos · Studio Admin</p>
+<nav>
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('test')">Test Ria</button>
+<button onclick="show('enquiries')">Enquiries</button>
+<button onclick="show('customers')">Customers</button>
+<button onclick="show('integrations')">Integrations</button>
+</nav></header>
+<main>
+<section id="dashboard" class="view"><h2>Dashboard</h2><div id="cards" class="grid"></div>
+<div class="panel"><h3>Today's appointments</h3><div id="today"></div></div></section>
+
+<section id="test" class="view hidden"><h2>Test Ria</h2>
+<div class="chat panel"><div id="chatlog"></div><div id="chatcontrols"></div></div></section>
+
+<section id="enquiries" class="view hidden"><h2>Enquiries</h2><div id="enquiryList"></div></section>
+
+<section id="customers" class="view hidden"><h2>Customers</h2>
+<input id="custSearch" placeholder="Search name, phone, email or Instagram" oninput="loadCustomers()">
+<div id="customerList"></div></section>
+
+<section id="integrations" class="view hidden"><h2>Integrations</h2><div class="grid">
+<div class="panel"><h3>Instagram / Meta</h3><p class="bad">Not connected</p><p>Ready for the official Meta API connection later.</p></div>
+<div class="panel"><h3>Stripe</h3><p class="bad">Not connected</p><p>Deposit flow is test mode only. No card details are collected.</p></div>
+</div></section>
+</main><script src="/static/app.js"></script></body></html>
