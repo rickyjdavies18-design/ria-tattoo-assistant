@@ -112,7 +112,7 @@ class BookingIn(BaseModel):
 
 @app.get("/", response_class=HTMLResponse)
 def home():
-    return open("static/index.html", encoding="utf-8").read()
+    return open("index.html", encoding="utf-8").read()
 
 @app.get("/api/dashboard")
 def dashboard():
