@@ -64,7 +64,7 @@ async function submitText(key){
 }
 async function saveTattoo(){
  addBubble("Perfect. If you want to book, I’ll show you actual available dates. I’ll only ask for your full details once you choose one.");
- const dates=await fetch('/api/availability').then(r=>r.json());
+ const dates=await fetch('/api/availability?preferred='+encodeURIComponent(state.answers.preferred_date||'')).then(r=>r.json());
  setControls(dates.slice(0,8).map(d=>`<button class="choice" onclick='chooseDate(${JSON.stringify(d)})'>${d.label} · ${d.session_type} · £${d.price}</button>`).join('')+'<button onclick="startTest()">Cancel</button>');
 }
 function chooseDate(d){
