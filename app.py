@@ -8,7 +8,7 @@ import sqlite3
 
 DB = "ria.db"
 app = FastAPI(title="Ria - Tattoo Assistant")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.m
 
 def db():
     conn = sqlite3.connect(DB)
