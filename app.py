@@ -175,8 +175,39 @@ async def update_enquiry(eid: int, request: Request):
     return {"ok": True}
 
 @app.get("/api/availability")
-def availability():
-    return available_dates()
+def availability(preferred: Optional[str] = ""):
+    dates = available_dates()
+    if not preferred:
+        return dates
+
+    text = preferred.lower()
+    months = {
+        "january": 1, "february": 2, "march": 3, "april": 4,
+        "may": 5, "june": 6, "july": 7, "august": 8,
+        "september": 9, "october": 10, "november": 11, "december": 12
+    }
+
+    month = next((n for name, n in months.items() if name in text), None)
+    numbers = ''.join(c if c.isdigit() else ' ' for c in text).split()
+
+    if not month or not numbers:
+        return dates
+
+    day = int(numbers[0])
+    today = date.today()
+    year = today.year
+
+    if (month, day) < (today.month, today.day):
+        year += 1
+
+    start = date(year, month, day)
+    end = start + timedelta(days=6) if "week" in text else None
+
+    return [
+        d for d in dates
+        if date.fromisoformat(d["date"]) >= start
+        and (end is None or date.fromisoformat(d["date"]) <= end)
+    ]
 
 @app.post("/api/bookings")
 def create_booking(data: BookingIn):
